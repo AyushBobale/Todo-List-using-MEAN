@@ -4,9 +4,11 @@ $theme-colors: (
   "dark"        : $mydark_nav,
 );
 
-html, body{
-  height        : 100vh;
-  overflow      : hidden;
+html, body, .component-container{
+  height                  : 100vh;
+  overflow                : hidden;
+  background-color        : $mydark_main;
 }
+
 
 @import "node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,16 @@
+@import "/node_modules/bootstrap/scss/functions";
+@import "/node_modules/bootstrap/scss/variables";
+@import "/node_modules/bootstrap/scss/mixins";
+@import "/src/variables.scss";
+
+
+projects {
+    background-color    : $mydark_main;
+    color               : $white;
+    height              : 100%;
+    display             : flex;
+    flex-direction      : column;
+    align-items         : center;
+    overflow-x          : hidden;
+    overflow-y          : scroll;
+}
