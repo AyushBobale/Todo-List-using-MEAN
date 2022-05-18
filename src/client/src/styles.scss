@@ -1,9 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Importing Bootstrap SCSS file. */
+@import "variables";
 
 $theme-colors: (
-  "dark"        : #262626,
+  "dark"        : $mydark_nav,
 );
+
+html, body{
+  height        : 100vh;
+  overflow      : hidden;
+}
 
 @import "node_modules/bootstrap/scss/bootstrap";

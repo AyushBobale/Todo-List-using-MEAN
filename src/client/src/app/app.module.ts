@@ -11,7 +11,7 @@ import { MainbodyComponent } from './components/mainbody/mainbody.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    MainbodyComponent
+    MainbodyComponent,
   ],
   imports: [
     BrowserModule,

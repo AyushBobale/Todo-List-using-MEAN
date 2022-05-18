@@ -1,0 +1,44 @@
+@import "/node_modules/bootstrap/scss/functions";
+@import "/node_modules/bootstrap/scss/variables";
+@import "/node_modules/bootstrap/scss/mixins";
+@import "/src/variables.scss";
+
+
+main {
+    background-color    : $mydark_main;
+    color               : $white;
+    height              : 100%;
+    display             : flex;
+    flex-direction      : column;
+    align-items         : center;
+}
+
+.main-column{
+    width               : $content_width;
+    margin-top          : 2%;
+    margin-bottom       : 1%;
+    display             : flex;
+    flex-direction      : row;
+    justify-content     : center;
+    height              : fit-content;
+}
+
+.left-item {
+    align-items         : flex-start;
+    display             : flex;
+    flex-direction      : column;
+    width               : 70%;
+}
+.right-item {
+    align-items         : flex-end;
+    display             : flex;
+    flex-direction      : column;
+    width: 30%;
+}
+
+hr.light {
+    border-top          : 1px solid $gray-100;
+    margin              : 0%;
+    width               : $content_width;
+
+}

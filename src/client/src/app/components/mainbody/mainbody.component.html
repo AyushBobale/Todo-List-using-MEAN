@@ -1,3 +1,23 @@
 <main>
-    <p>Test</p>
+    <div class="main-column">
+        <div class="left-item">
+            <h4>Today</h4>
+        </div>
+        <div class="right-item">
+            <h4>View</h4>
+        </div>
+    </div>
+    <hr class="light">
+    <ng-container *ngFor="let task of tasks">
+        <div class="main-column">
+            <div class="left-item">
+                {{task.task}}
+            </div>
+            <div class="right-item">
+                {{task.date}}
+            </div>
+        </div>
+        <hr class="light">
+    </ng-container>
 </main>
+
