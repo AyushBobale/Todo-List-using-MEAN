@@ -20,10 +20,23 @@
         </div>
         <hr class="light">
     </ng-container>
-    
+
     <ng-container>
-        <div class="add-task"></div>
+        <!----Bootstrap forms form validation-->
+            <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+                <textarea cols="5" formControlName="taskname" name="taskname">Add task Description</textarea>
+                <div class="form-right">
+                    <div class="left-item">
+                        <input type="date" formControlName="date">
+                    </div>
+                    <div class="right-item">
+                        <button [disabled]="!taskForm.valid"> Add Task</button>
+                    </div>
+                </div>
+            </form>
+        <hr class="light">
     </ng-container>
+
 
 </main>
 

@@ -7,7 +7,7 @@
 main {
     background-color    : $mydark_main;
     color               : $white;
-    height              : 100%;
+    height              : 100vh;
     display             : flex;
     flex-direction      : column;
     align-items         : center;
@@ -17,8 +17,8 @@ main {
 
 .main-column{
     width               : $content_width;
-    margin-top          : 2%;
-    margin-bottom       : 1%;
+    margin-top          : 20px;
+    margin-bottom       : 10px;
     display             : flex;
     flex-direction      : row;
     justify-content     : center;
@@ -26,12 +26,14 @@ main {
 }
 
 .left-item {
+    margin-right        : 3px;
     align-items         : flex-start;
     display             : flex;
     flex-direction      : column;
     width               : 70%;
 }
 .right-item {
+    margin-left         : 3px;
     align-items         : flex-end;
     display             : flex;
     flex-direction      : column;
@@ -42,5 +44,29 @@ hr.light {
     border-top          : 1px solid $gray-100;
     margin              : 0%;
     width               : $content_width;
+}
+form {
+    margin-top          : 1%;
+    margin-bottom       : 1%;
+    display             : flex;
+    flex-direction      : column;
+    width               : $content_width;
+}
+.form-right{
+    margin-top          : 10px;
+    display             : flex;
+    flex-direction      : row;
+    width               : 100%;
+}
+.left-item input{
+    width               : 100%;
+    height              : 30px;
+}
+.right-item button{
+    width               : 100%;
+    height              : 30px;
+}
 
+form textarea {
+    height: 120px;
 }

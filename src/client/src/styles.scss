@@ -1,4 +1,7 @@
 @import "variables";
+@import "/node_modules/bootstrap/scss/functions";
+@import "/node_modules/bootstrap/scss/variables";
+@import "/node_modules/bootstrap/scss/mixins";
 
 $theme-colors: (
   "dark"        : $mydark_nav,
@@ -10,5 +13,17 @@ html, body, .component-container{
   background-color        : $mydark_main;
 }
 
+
+$form-border-radius : 5px;
+form textarea, form button, form input{
+  background-color        : $mydark_main;
+  border-radius           : $form-border-radius;
+  border-width            : 1px;
+  border-color            : $gray-500; 
+  color                   : $white;
+}
+form button:disabled{
+  color                   : $gray-600;
+}
 
 @import "node_modules/bootstrap/scss/bootstrap";
