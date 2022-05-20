@@ -4,7 +4,7 @@ import { getTask, postTask, updateTask, deleteTask }  from '../controller/taskCo
 
 router.get('/', getTask)
 router.post('/', postTask)
-router.put('/:id', updateTask)
-router.delete('/:id', deleteTask)
+router.put('/', updateTask)
+router.delete('/', deleteTask)
 
 export default router

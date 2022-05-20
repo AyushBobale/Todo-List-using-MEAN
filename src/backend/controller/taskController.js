@@ -1,23 +1,39 @@
 import asyncHandler from "express-async-handler"
+import TaskModel from "../models/taskModel.js"
 
 const getTask = asyncHandler( async (req, res) => {
-    res.status(200).json({msg:'Get task new'})
+    const tasks = await TaskModel.find({})
+    res.status(200).json(tasks)
 })
 
 const postTask = asyncHandler( async (req, res) => {
-    if(!req.body.text){
+    if(!req.body.task){
         res.status(400)
         throw new Error('Please add text message')
     }
-    res.status(200).json({msg:`Post task ${req.body.text}`})
+    const tasks = await TaskModel.create({task : req.body.task})
+    res.status(200).json({msg:`Task added  ${req.body.task}`})
 })
 
 const updateTask = asyncHandler( async (req, res) => {
-    res.status(200).json({msg:`Update task ${req.params.id}`})
+    const task = await TaskModel.findById(req.body.id)
+    if(!task){
+        res.status(400)
+        throw new Error('Task Not found')
+    }
+    console.log(req.body.task)
+    const taskUpdate = await TaskModel.findByIdAndUpdate(req.body.id, {task : req.body.task}, {new : true})
+    res.status(200).json({msg: taskUpdate})
 })
 
 const deleteTask = asyncHandler( async (req, res) => {
-    res.status(200).json({msg:`Delete task ${req.params.id}`})
+    const task = await TaskModel.findById(req.body.id)
+    if(!task){
+        res.status(400)
+        throw new Error('Task Not found')
+    }
+    const taskDelete = await TaskModel.findByIdAndDelete(req.body.id)
+    res.status(200).json({msg:`Deleted task`, obj : taskDelete})
 })
 
 
