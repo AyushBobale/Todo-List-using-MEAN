@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -9,21 +10,48 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./mainbody.component.scss']
 })
 
-export class MainbodyComponent{
-  public tasks: Array<any> = [
-    {task: 'Task 1',  date: '2022-05-03'},
-  ]
-
+export class MainbodyComponent implements OnInit{
+  
+  constructor(private http    : HttpClient,
+              private router  : Router,
+              private route   : ActivatedRoute){
+    this.tasks = []
+  }
+  
+  public tasks: any ;
+  
   taskForm = new FormGroup({
     taskname  : new FormControl('', [Validators.required,
                                     Validators.minLength(3)]),
-    date      : new FormControl('2022-05-03', [Validators.required])
+    date      : new FormControl('05-05-2022', [Validators.required])
     }
   );
 
   addTask(){
-    this.tasks.push({task: this.taskForm.value.taskname, date: this.taskForm.value.date})
+    this.http.post('http://localhost:3000/tasks/', {task: this.taskForm.value.taskname})
+    .subscribe((res)=>{
+      console.log(res)
+    });
+    this.taskForm.reset();
+    this.getTasks();
+    this.reloadPage();
   }
-  //================================================================
-  
+
+  ngOnInit(): void {
+    this.getTasks()
+  }
+
+  private getTasks(){
+    this.http.get('http://localhost:3000/tasks/')
+    .subscribe((res)=>{
+      this.tasks = res;
+      //console.log(this.tasks);
+    })
+  }
+
+  private reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], {relativeTo:this.route})
+  }
 }
