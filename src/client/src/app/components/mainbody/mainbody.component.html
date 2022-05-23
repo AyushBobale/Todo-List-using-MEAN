@@ -2,7 +2,7 @@
     <!--- Dynamic Scaling i.e. responsive of the width--->
     <div class="main-column">
         <div class="left-item">
-            <h4>Today</h4>
+            <h4>Today</h4> <div class="date"> {{today}} </div> 
         </div>
         <div class="right-item">
             <h4>View</h4>
@@ -14,12 +14,14 @@
             <div class="left-item">
                 {{task.task}}
             </div>
-            <div class="right-item">
+            <div class="right-item date">
                 {{task.date}}
+                <button (click)="delTask(task._id)">Delete Task</button>
             </div>
         </div>
         <hr class="light">
     </ng-container>
+    
 
     <ng-container>
         <!----Bootstrap forms form validation-->
@@ -36,7 +38,5 @@
             </form>
         <hr class="light">
     </ng-container>
-
-
 </main>
 

@@ -11,28 +11,31 @@ const postTask = asyncHandler( async (req, res) => {
         res.status(400)
         throw new Error('Please add text message')
     }
-    const tasks = await TaskModel.create({task : req.body.task})
+    const tasks = await TaskModel.create({task : req.body.task, date : req.body.date})
     res.status(200).json({msg:`Task added  ${req.body.task}`})
 })
 
 const updateTask = asyncHandler( async (req, res) => {
-    const task = await TaskModel.findById(req.body.id)
+    const task = await TaskModel.findById(req.params.id)
     if(!task){
         res.status(400)
         throw new Error('Task Not found')
     }
     console.log(req.body.task)
-    const taskUpdate = await TaskModel.findByIdAndUpdate(req.body.id, {task : req.body.task}, {new : true})
+    const taskUpdate = await TaskModel.findByIdAndUpdate(req.params.id, 
+        {   task : req.body.task, 
+            date : req.body.date}, 
+        {new : true})
     res.status(200).json({msg: taskUpdate})
 })
 
 const deleteTask = asyncHandler( async (req, res) => {
-    const task = await TaskModel.findById(req.body.id)
+    const task = await TaskModel.findById(req.params.id)
     if(!task){
         res.status(400)
         throw new Error('Task Not found')
     }
-    const taskDelete = await TaskModel.findByIdAndDelete(req.body.id)
+    const taskDelete = await TaskModel.findByIdAndDelete(req.params.id)
     res.status(200).json({msg:`Deleted task`, obj : taskDelete})
 })
 

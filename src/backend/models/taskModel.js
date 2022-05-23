@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const taskSchema = mongoose.Schema({
-        task    : {type : String, required : true}
+        task    : {type : String, required : true},
+        date    : {type : String, required : true}
     }, 
     {timestamps : true})
 

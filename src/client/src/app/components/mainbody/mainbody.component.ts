@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TasksHttpService } from 'src/app/services/tasks-http.service';
 
 
 @Component({
@@ -11,47 +12,49 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class MainbodyComponent implements OnInit{
-  
-  constructor(private http    : HttpClient,
-              private router  : Router,
-              private route   : ActivatedRoute){
+  constructor(private http          : HttpClient,
+              private router        : Router,
+              private route         : ActivatedRoute,
+              private taskService   : TasksHttpService){
     this.tasks = []
-  }
-  
-  public tasks: any ;
-  
-  taskForm = new FormGroup({
-    taskname  : new FormControl('', [Validators.required,
-                                    Validators.minLength(3)]),
-    date      : new FormControl('05-05-2022', [Validators.required])
-    }
-  );
-
-  addTask(){
-    this.http.post('http://localhost:3000/tasks/', {task: this.taskForm.value.taskname})
-    .subscribe((res)=>{
-      console.log(res)
-    });
-    this.taskForm.reset();
-    this.getTasks();
-    this.reloadPage();
   }
 
   ngOnInit(): void {
     this.getTasks()
   }
+  
+  public tasks : any ;
+  public today = new Date().toLocaleDateString();
+  private isFetching = false;
+  taskForm = new FormGroup({
+    taskname  : new FormControl('', [Validators.required,
+                                    Validators.minLength(3)]),
+    date      : new FormControl('2022-05-05', [Validators.required])
+    }
+  );
 
-  private getTasks(){
-    this.http.get('http://localhost:3000/tasks/')
-    .subscribe((res)=>{
+  addTask(){
+    this.taskService.createTask(this.taskForm.value.taskname, this.taskForm.value.date);
+    this.getTasks();
+    this.taskService.reloadPage(this.router, this.route);
+  }
+
+  getTasks(){
+    this.isFetching = true;
+    this.taskService.getTasks().subscribe((res) => {
       this.tasks = res;
-      //console.log(this.tasks);
+      this.isFetching = false
     })
+    console.log(this.isFetching)
   }
 
-  private reloadPage(){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['./'], {relativeTo:this.route})
+  delTask(id : String){
+    this.taskService.deleteTask(id);
+    this.getTasks()
+    this.taskService.reloadPage(this.router, this.route)
   }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 }
