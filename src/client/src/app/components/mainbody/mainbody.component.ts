@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TasksHttpService } from 'src/app/services/tasks-http.service';
+import { Task } from 'src/app/models/TaskModel';
+//API request optimizations
+
 
 
 @Component({
@@ -23,9 +26,9 @@ export class MainbodyComponent implements OnInit{
     this.getTasks()
   }
   
-  public tasks : any ;
+  public tasks : Task[] ;
   public today = new Date().toLocaleDateString();
-  private isFetching = false;
+  public isFetching = false;
   taskForm = new FormGroup({
     taskname  : new FormControl('', [Validators.required,
                                     Validators.minLength(3)]),
@@ -35,26 +38,20 @@ export class MainbodyComponent implements OnInit{
 
   addTask(){
     this.taskService.createTask(this.taskForm.value.taskname, this.taskForm.value.date);
-    this.getTasks();
-    this.taskService.reloadPage(this.router, this.route);
+    this.taskService.reloadPage(this.router, this.route)
   }
 
   getTasks(){
-    this.isFetching = true;
+    this.tasks = []
     this.taskService.getTasks().subscribe((res) => {
-      this.tasks = res;
-      this.isFetching = false
+      this.tasks.push(...res)
     })
-    console.log(this.isFetching)
   }
 
   delTask(id : String){
     this.taskService.deleteTask(id);
-    this.getTasks()
     this.taskService.reloadPage(this.router, this.route)
   }
 
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
+
 }

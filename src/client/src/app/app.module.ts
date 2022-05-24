@@ -14,11 +14,6 @@ import { MainbodyComponent } from './components/mainbody/mainbody.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { RouterModule } from '@angular/router';
 
-const appRoutes: Routes = [
-  {path: '', component: MainbodyComponent},
-  {path: 'projects', component: ProjectsComponent},
-]
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +26,6 @@ const appRoutes: Routes = [
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
   providers: [],

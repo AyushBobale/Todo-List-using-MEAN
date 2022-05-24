@@ -13,11 +13,10 @@ export class TasksHttpService {
   private tasks : any;
 
   getTasks(){
-    return this.http.get(this.url)
+    return this.http.get<any[]>(this.url)
   }
 
   createTask(task: String, date: String) {
-    console.log({task : task, date : date})
     this.http.post(this.url, 
       {task : task, date : date})
       .subscribe((res)=>{

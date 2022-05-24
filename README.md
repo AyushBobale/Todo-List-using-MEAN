@@ -1,5 +1,2 @@
 # Todo-List-using-MEAN
-Angluar based project
-
-## Bootstarp forms
-## Dynamic Scaling
+Creating a Todo List site clone using Angluar.
