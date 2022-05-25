@@ -9,19 +9,24 @@
         </div>
     </div>
     <hr class="light">
-    <ng-container *ngFor="let task of tasks">
-        <div class="main-column">
-            <div class="left-item">
-                {{task.task}}
+    <ng-container *ngIf="newtasks$ | async as newtasks else loading">
+        <ng-container *ngFor="let task of newtasks">
+            <div class="main-column">
+                <div class="left-item">
+                    {{task.task}}
+                </div>
+                <div class="right-item date">
+                    {{task.date}}
+                    <button (click)="delTask(task._id)">Delete Task</button>
+                </div>
             </div>
-            <div class="right-item date">
-                {{task.date}}
-                <button (click)="delTask(task._id)">Delete Task</button>
-            </div>
-        </div>
-        <hr class="light">
-    </ng-container>
+            <hr class="light">
+        </ng-container>
+    </ng-container>   
     
+    <ng-template #loading>
+        <span>Loading</span>
+    </ng-template> 
 
     <ng-container>
         <!----Bootstrap forms form validation-->

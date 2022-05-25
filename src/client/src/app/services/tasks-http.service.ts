@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Task } from '../models/TaskModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class TasksHttpService {
   private tasks : any;
 
   getTasks(){
-    return this.http.get<any[]>(this.url)
+    return this.http.get<Task[]>(this.url);
   }
 
   createTask(task: String, date: String) {
@@ -25,7 +26,7 @@ export class TasksHttpService {
   }
 
   deleteTask(id : String){
-    this.http.delete(`${this.url}${id}`)
+    return this.http.delete<Task>(`${this.url}${id}`)
       .subscribe((res)=> {
         //console.log(res);
       })

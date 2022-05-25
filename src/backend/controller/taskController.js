@@ -36,7 +36,7 @@ const deleteTask = asyncHandler( async (req, res) => {
         throw new Error('Task Not found')
     }
     const taskDelete = await TaskModel.findByIdAndDelete(req.params.id)
-    res.status(200).json({msg:`Deleted task`, obj : taskDelete})
+    res.status(200).json(taskDelete)
 })
 
 
