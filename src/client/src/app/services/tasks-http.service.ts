@@ -18,11 +18,7 @@ export class TasksHttpService {
   }
 
   createTask(task: String, date: String) {
-    this.http.post(this.url, 
-      {task : task, date : date})
-      .subscribe((res)=>{
-        //console.log(res);
-      });
+    return this.http.post<Task>(this.url, {task : task, date : date});
   }
 
   deleteTask(id : String){

@@ -12,7 +12,7 @@ const postTask = asyncHandler( async (req, res) => {
         throw new Error('Please add text message')
     }
     const tasks = await TaskModel.create({task : req.body.task, date : req.body.date})
-    res.status(200).json({msg:`Task added  ${req.body.task}`})
+    res.status(200).json(tasks);
 })
 
 const updateTask = asyncHandler( async (req, res) => {

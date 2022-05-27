@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { MainbodyComponent } from './components/mainbody/mainbody.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-import { RouterModule } from '@angular/router';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     MainbodyComponent,
     ProjectsComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

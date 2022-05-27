@@ -9,27 +9,15 @@
         </div>
     </div>
     <hr class="light">
-    <ng-container *ngIf="newtasks$ | async as newtasks else loading">
+    
+    <ng-container *ngIf="newtasks$ | async as newtasks">
         <ng-container *ngFor="let task of newtasks">
-            <div class="main-column">
-                <div class="left-item">
-                    {{task.task}}
-                </div>
-                <div class="right-item date">
-                    {{task.date}}
-                    <button (click)="delTask(task._id)">Delete Task</button>
-                </div>
-            </div>
+            <div class="app-task main-column" [task]=task.task [date]=task.date [id]="task._id"></div>
             <hr class="light">
         </ng-container>
     </ng-container>   
-    
-    <ng-template #loading>
-        <span>Loading</span>
-    </ng-template> 
 
     <ng-container>
-        <!----Bootstrap forms form validation-->
             <form [formGroup]="taskForm" (ngSubmit)="addTask()">
                 <textarea cols="5" formControlName="taskname" name="taskname">Add task Description</textarea>
                 <div class="form-right">

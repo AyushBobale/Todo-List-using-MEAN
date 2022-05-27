@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TasksHttpService } from 'src/app/services/tasks-http.service';
 import { Task } from 'src/app/models/TaskModel';
@@ -26,7 +26,7 @@ export class MainbodyComponent implements OnInit{
   public tasks : Task[] ;
   public newtasks$!: Observable<Task[]>;
   public today = new Date().toLocaleDateString();
-  public deltask$! : Observable<Task>;
+  public addtask$! : Observable<Task>;
 
   taskForm = new FormGroup({
     taskname  : new FormControl('', [Validators.required,
@@ -42,21 +42,17 @@ export class MainbodyComponent implements OnInit{
   }
   
   addTask(){
-    this.taskService.createTask(this.taskForm.value.taskname, this.taskForm.value.date);
-    this.taskService.reloadPage(this.router, this.route)
+    this.taskService.createTask(this.taskForm.value.taskname, this.taskForm.value.date)
+      .toPromise().then(res =>{
+        this.newtasks$ = this.taskService.getTasks();
+      }).catch(err =>{
+        console.log(err);
+      })
+    //this.taskService.reloadPage(this.router, this.route)
   }
-
-  // getTasks(){
-  //   this.tasks = []
-  //   this.taskService.getTasks().subscribe((res) => {
-  //     this.tasks.push(...res)
-  //   })
-  // }
-
-  delTask(id : String){
-    this.taskService.deleteTask(id);
-    this.taskService.reloadPage(this.router, this.route)
-  }
-
 
 }
+
+//==============================================================
+//https://www.youtube.com/watch?v=MbDDWZZK2Yg
+//==============================================================
